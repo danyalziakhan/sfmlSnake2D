@@ -11,7 +11,7 @@ Building
 
 (Note: only Linux is supported currently)
 
-It requires SFML 2.1, TGUI and Thor.
+It requires SFML 2.1+ and TGUI.
 
 ```
 $ make

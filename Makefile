@@ -1,8 +1,6 @@
-
-
 CPPFLAGS = -std=c++1y
-LFLAGS = -ltgui -lthor -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
-OUTPUT = bin/main
+LFLAGS = -ltgui -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+OUTPUT = bin/sfmlSnake2D
 
 main: main.o Fruit.o Snake.o Menu.o InGame.o Game.o SettingsParser.o
 	$(CXX) main.o Fruit.o Snake.o Menu.o InGame.o Game.o SettingsParser.o -o $(OUTPUT) $(CPPFLAGS) $(LFLAGS)

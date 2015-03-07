@@ -31,32 +31,6 @@ InGame::InGame(std::shared_ptr<sf::RenderWindow> window) {
 	
 	eatFruitBuffer.loadFromFile("data/audio/bite.ogg");
 	eatFruitSound.setBuffer(eatFruitBuffer);
-	
-	// Load texture
-	sf::Texture texture;
-	if (!texture.loadFromFile("data/particle.png"))
-		return;
-		
-	system.setTexture(texture);
-	system.addAffector(FireworkAffector());
-	
-	explosionTimer.restart(sf::seconds(1.f));
-
-	// Connect timer to a lambda expression which restarts the timer every time it expires
-	explosionTimer.connect( [] (thor::CallbackTimer& trigger)
-	{
-		trigger.restart(explosionInterval);
-	});
-
-	// Connect timer to a lambda expression that creates an explosion at expiration
-	explosionTimer.connect0( [this] ()
-	{
-		// Compute random position on screen
-		sf::Vector2f position(thor::randomDev(400.f, 300.f), thor::randomDev(300.f, 200.f));
-
-		// Add a temporary emitter to the particle system
-		system.addEmitter(FireworkEmitter(position), explosionDuration);
-	});
 }
 
 bool InGame::go() {
@@ -182,10 +156,7 @@ bool InGame::go() {
 			
 			window->draw(pauseTxt);	
 		}
-		
-		// Update particle system and timer
-		system.update(frameClock.restart());
-		explosionTimer.update();
+
 		
 		window->draw(scoreTxt);
 		window->draw(speedTxt);
